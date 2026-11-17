@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>github templates ajax example</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"> </script>
+
+</head>
+<body>
+	<h2>Handlebars templates to populate a table with an array of objects using Ajax</h2>
+	<h3>Array of people objects as a table</h3>
+	<div id="peopleTable"></div>
+</body>
+<script type="text/x-handlebars-template" id="tableTemplate">
+	<table cellspacing='12'>
+		<tr>
+			<th>Name</th><th>State</th><th>Age</th><th>Flavor</th>
+		</tr>
+		{{#each rows}}
+			<tr>
+				<td>{{name}}</td><td>{{state}}</td><td>{{age}}</td><td>{{flavor}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</script>
+<script>
+	window.onload = async function(){
+		var url = "hb6data.json";
+		var response = await fetch(url);
+		
+		if(response.ok){
+			var data = await response.json();
+			var templateText = document.getElementById('tableTemplate').innerHTML;
+			var compiledTemplateText = Handlebars.compile(templateText);
+			html = compiledTemplateText({rows: data})
+			
+			document.getElementById('peopleTable').innerHTML = html;
+		}else{
+			document.getElementById('peopleTable').innerHTML = "Data Not Found";
+		}
+	}
+</script>
+</html>

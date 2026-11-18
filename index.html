@@ -43,12 +43,14 @@ async function getData(selected_meal){
 	var response = await fetch('menu_items.json');
 	
 	if(response.ok){
+		alert("inside resonpse.ok");
 		var data = await response.json();
 		var meal_items = data.filter((item) => item.meal == selected_meal);
-		
+		conlsoe.log(meal_items);
 		var templateText = document.getElementById('menuTemplate').innerHTML;
 		var compiledTemplateText = Handlebars.compile(templateText);
 		var compiledHTML = compiledTemplateText({rows: meal_items});
+		console.log(compiledHTML);
 		document.getElementById('menuTable'.innerHTML = compiledHTML);
 	}
 	else{

@@ -46,12 +46,12 @@ async function getData(selected_meal){
 		alert("inside resonpse.ok");
 		var data = await response.json();
 		var meal_items = data.filter((item) => item.meal == selected_meal);
-		conlsoe.log(meal_items);
+		console.log(meal_items);
 		var templateText = document.getElementById('menuTemplate').innerHTML;
 		var compiledTemplateText = Handlebars.compile(templateText);
 		var compiledHTML = compiledTemplateText({rows: meal_items});
 		console.log(compiledHTML);
-		document.getElementById('menuTable'.innerHTML = compiledHTML);
+		document.getElementById('menuTable').innerHTML = compiledHTML;
 	}
 	else{
 		document.querySelector('#menuTable').innerHTML = "There was an error, or menu items not found";

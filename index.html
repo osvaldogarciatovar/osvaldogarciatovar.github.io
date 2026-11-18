@@ -43,7 +43,7 @@ async function getData(selected_meal){
 	var response = await fetch('menu_items.json');
 	
 	if(response.ok){
-		var data = response.json();
+		var data = await response.json();
 		var meal_items = data.filter((item) => item.meal == selected_meal);
 		
 		var templateText = document.getElementById('menuTemplate').innerHTML;
